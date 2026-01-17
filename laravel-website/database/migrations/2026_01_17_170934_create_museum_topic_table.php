@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('museum_topic', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('museum_id');
+            $table->unsignedBigInteger('topic_id');
+            // $table->primary(['museum_id', 'topic_id']);
+            $table->foreign('museum_id')->references('id')->on('museums')->onDelete('cascade');
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
             $table->timestamps();
         });
     }

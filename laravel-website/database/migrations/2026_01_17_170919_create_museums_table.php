@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('museums', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre', 255);
+            $table->string('ciudad');
+            // temática es la tabla pivot que relaciona modelos
+            $table->text('fechas_horarios');
+            $table->enum('visitas_guiadas', ['si', 'no']);
+            $table->decimal('precio', 8, 2);
+            $table->string('imagen_portada');
             $table->timestamps();
         });
     }
