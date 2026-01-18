@@ -10,12 +10,16 @@ use App\Models\Topic;
 
 class MuseumApiController extends Controller
 {
-    public function catalog($page)
+
+    protected $allFields = ['id', 'nombre', 'ciudad', 'fechas_horarios', 'visitas_guiadas', 'precio', 'imagen_portada'];
+    protected $basicFields = ['museums.id', 'museums.nombre', 'museums.ciudad'];
+
+    public function index($page)
     {
-        $museums = Museum::paginate(5, ['*'], 'page', $page);
+        $museums = Museum::select($this->basicFields)->paginate(5, ['*'], 'page', $page);
 
         if ($museums->isEmpty() || $page < 1) {
-            return response()->json(['error' => 'Page Not Found'], 404);
+            return response()->json(['error' => 'Not Found'], 404);
         }
 
         return response()->json($museums);
@@ -23,21 +27,26 @@ class MuseumApiController extends Controller
 
     public function museum($id)
     {
-        $museum = Museum::with('topics')->findOrFail($id);
+        $museum = Museum::select($this->allFields)->find($id);
+
+        if (!$museum) {
+            return response()->json(['error' => 'Not Found'], 404);
+        }
+
         return response()->json($museum);
     }
 
     public function museumTopics($id, $page)
     {
         $topic = Topic::find($id);
-        if (!$topic) return response()->json(['error' => 'Topic Not Found'], 404);
+        if (!$topic) {
+            return response()->json(['error' => 'Not Found'], 404);
+        }
 
-        $museums = $topic->museums()
-            ->select('museums.id', 'museums.nombre', 'museums.ciudad', 'museums.precio', 'museums.fechas_horarios', 'museums.visitas_guiadas', 'museums.imagen_portada')
-            ->paginate(5, ['*'], 'page', $page);
+        $museums = $topic->museums()->select($this->basicFields)->paginate(5, ['*'], 'page', $page);
 
-        if ($museums->isEmpty()) {
-            return response()->json(['error' => 'Page Not Found'], 404);
+        if ($museums->isEmpty() || $page < 1) {
+            return response()->json(['error' => 'Not Found'], 404);
         }
 
         return response()->json($museums);
