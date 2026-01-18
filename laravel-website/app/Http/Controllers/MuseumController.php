@@ -18,10 +18,10 @@ class MuseumController extends Controller
         return view('welcome', compact('museums'));
     }
 
-    // public function show(Museum $id)
-    // {
-    //     $museum = Museum::findOrFail($id);
-    //     return view('museum_detail', compact('museum'));
-    // }
+    public function detail($id)
+    {
+        $museum = Museum::where('id', $id)->first();
+        return view('museum_detail', compact('museum'));
+    }
     
 }

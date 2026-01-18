@@ -5,7 +5,7 @@ use App\Http\Controllers\MuseumController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MuseumController::class, 'index'])->name('welcome');  
-// Route::get('/museum/{id}', [MuseumController::class, 'show'])->name('museum.show');
+Route::get('/museum/{id}', [MuseumController::class, 'detail'])->name('museum_detail');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
