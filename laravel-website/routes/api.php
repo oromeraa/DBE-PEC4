@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\MuseumApiController;
 Route::middleware('api')->group(function () {
     Route::get('/museums/{page}', [MuseumApiController::class, 'catalog']);
     Route::get('/museum/{id}', [MuseumApiController::class, 'museum']);
-    Route::get('/topics/{id}/{page}', [MuseumApiController::class, 'museumTopics']);
+    Route::get('/topic/{id}/{page}', [MuseumApiController::class, 'byTopics']);
 });
 
 Route::get('/user', function (Request $request) {
