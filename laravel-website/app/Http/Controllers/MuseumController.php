@@ -9,7 +9,7 @@ class MuseumController extends Controller
 {
     public function index()
     {
-        $realMuseums = Museum::where('id', [1,2])->get();
+        $realMuseums = Museum::whereIn('id', [1,2])->get();
 
         $fakeMuseums = Museum::whereNotIn('id', [1,2])->inRandomOrder()->take(3)->get();
 

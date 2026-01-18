@@ -21,8 +21,36 @@
     </head>
     <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
         <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
+            
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
+                    <a 
+                        href="{{ url('/') }}"
+                        class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                        >
+                        Home
+                    </a>
+                    <a 
+                        href="{{ url('/api/museums/1') }}" 
+                        target="_blank"
+                        class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                        >
+                        API_museums
+                    </a>
+                    <a 
+                        href="{{ url('/api/museum/1') }}" 
+                        target="_blank"
+                        class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                        >
+                        API_museum
+                    </a>
+                    <a 
+                        href="{{ url('/api/topic/1/1') }}" 
+                        target="_blank"
+                        class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                        >
+                        API_topic
+                    </a>
                     @auth
                         <a
                             href="{{ url('/dashboard') }}"
@@ -50,17 +78,17 @@
             @endif
         </header>
         <div class="flex flex-col gap-30 items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <h1>Listado de Museos</h1>
+            <h1 class="text-2xl font-bold mb-4">Listado de Museos</h1>
             <div class="flex flex-col gap-4">
                 @foreach($museums as $museum)
-                    <div class="card bg-base-100 shadow-xl justify-center gap-1 p-2">
-                        <h3 class="card-title">
-                            <a href="{{ url('/museum/' . $museum->id) }}">
+                    <div class="card bg-base-100 shadow-xl gap-1 p-2 flex flex-col items-center w-[300px]">
+                        <h3 class="card-title text-center break-words w-full">
+                            <a href="{{ url('/museum/' . $museum->id) }}" class="w-full text-center">
                                 {{ $museum->nombre }}
                             </a>
                         </h3>
 
-                        <img src="{{ 'storage/app/public/' . $museum->image_portada }}" alt="{{ $museum->nombre }}">                        
+                        <img src="{{ asset('storage/' . $museum->imagen_portada) }}" alt="{{ $museum->nombre }}" style="width: 200px; height: 200px;" >                        
                         
                         <p>Ciudad: {{ $museum->ciudad }}</p>
                         <p>Precio: {{ $museum->precio }}€</p>

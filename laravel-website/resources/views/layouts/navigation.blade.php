@@ -15,6 +15,18 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="url('/')">
+                        {{ __('Home') }}
+                    </x-nav-link>
+                    <x-nav-link :href="url('/api/museums/1')" target="_blank">
+                        {{ __('API_museums') }}
+                    </x-nav-link>
+                    <x-nav-link :href="url('/api/museum/1')" target="_blank">
+                        {{ __('API_museum') }}
+                    </x-nav-link>
+                    <x-nav-link :href="url('/api/topic/1/1')" target="_blank">
+                        {{ __('API_topic') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -69,6 +81,18 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="url('/')">
+                {{ __('Home') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="url('/api/museums/1')" target="_blank">
+                {{ __('API_museums') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="url('/api/museum/1')" target="_blank">
+                {{ __('API_museum') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="url('/api/topic/1/1')" target="_blank">
+                {{ __('API_topic') }}
             </x-responsive-nav-link>
         </div>
 
